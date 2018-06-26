@@ -1,0 +1,33 @@
+{
+    "name": "OV Fiets App",
+    "short_name": "OV Fiets App",
+    "icons": [
+        {
+            "src": "./android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "./android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "./android-chrome-128x128.png",
+            "sizes": "128x128",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "./",
+    "theme_color": "#f7c613",
+    "background_color": "#f7c613",
+    "display": "standalone",
+    "prefer_related_applications": true,
+    "scope": "./",
+    "related_applications": [
+        {
+            "platform": "play",
+            "url": "https://play.google.com/store/apps/details?id=com.EchoSierraStudio.Ov_Fiets_App"
+        }
+    ]
+}

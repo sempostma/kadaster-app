@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="nl-NL">
+
+<head>
+
+    <meta http-equiv="Content-Security-Policy" content="default-src ws: 'unsafe-inline' 'self' data: gap: https://ssl.gstatic.com http://*.tile.osm.org https://*.googleapis.com ws: 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://*.gstatic.com http://*.tile.osm.org https://*.googleapis.com; media-src *; font-src 'self' https://*.gstatic.com http://*.tile.osm.org https://*.googleapis.com; img-src 'self' https://*.nationaalgeoregister.nl https://*.gstatic.com http://*.tile.osm.org https://*.googleapis.com data: content:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.polyfill.io https://*.gstatic.com http://*.tile.osm.org https://maps.googleapis.com; connect-src 'self' https://epsg.io https://*.nationaalgeoregister.nl https://*.gstatic.com https://*.googleapis.com;">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="mask-icon" href="./safari-pinned-tab.svg" color="#2b5797">
+    
+    <meta name="apple-mobile-web-app-title" content="OV Fiets App">
+    <meta name="application-name" content="OV Fiets App">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-navbutton-color" content="#f7c613">
+    <meta name="theme-color" content="#f7c613">
+    <meta name="description" content="Met de OV Fiets Website kunt u gemakkelijk informatie opzoeken over OV Fiets huurlocaties.">
+    <meta name="author" content="Sem Postma, sem.postma@gmail.com">
+    <meta name="keywords" content="Ov, Fiets, App, Website, Informatie, Vervoer, Verkeer, Openbaar, Huur, Locaties, Browser, Google, Play">
+    
+    <link rel="stylesheet" href="lib/onsen/css/onsenui.css">
+    <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.min.css">
+
+    
+    <link rel="stylesheet" type="text/css" href="lib/leaflet/leaflet.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+
+    
+
+    <title>OV Fiets App</title>
+</head>
+
+<body>
+    <ons-navigator id="navigator" page="views/splitter.html"></ons-navigator>
+
+    <!-- [if IE]>
+            <div id="oldbrowser-modal" class="modal" role="dialog" aria-expanded="true" style="position: fixed; z-index: 200000; padding-top: 100px; left: 0px; top: 0px; width: 100%; height: 100%; overflow: auto; background-color: rgba(0, 0, 0, 0.9); transition: padding-top 100ms ease-out; box-sizing: border-box; font-family: 'Ubuntu', sans-serif, Verdana, Geneva, Tahoma;">
+                <div class="modal-content" style="margin: auto; display: block; width: 80%; max-width: 700px; padding: 40px; background: white; box-sizing: border-box; ;">
+                    <h2 class="text-danger mt-1 mb-4" style="color: rgb(236, 78, 32); margin-top: 6px; margin-bottom: 36px; box-sizing: border-box; ;">Belangrijk!</h2>
+                    <p class="noscript-msg" style="box-sizing: border-box;">
+                        Je gebruikt een oudere
+                        <strong class="text-danger">outdated</strong> browser.
+                        <a href="http://browsehappy.com/" class="text-success" style="style="background-color: transparent; color: rgb(1, 111, 185); box-sizing: border-box; text-decoration: none;">Update je browser</a> om je ervaring te verbeteren.
+                    </p>
+                </div>
+            </div>
+    <![endif] -->
+
+    <noscript>
+        <!-- The No-Script Modal -->
+        <div id="noscript-modal" class="modal" role="dialog" aria-expanded="true" style="position: fixed; z-index: 200000; padding-top: 100px; left: 0px; top: 0px; width: 100%; height: 100%; overflow: auto; background-color: rgba(0, 0, 0, 0.9); transition: padding-top 100ms ease-out; box-sizing: border-box; font-family: 'Ubuntu', sans-serif, Verdana, Geneva, Tahoma;">
+            <div class="modal-content" style="margin: auto; display: block; width: 80%; max-width: 700px; padding: 40px; background: white; box-sizing: border-box; ;">
+                <h2 class="text-danger mt-1 mb-4" style="color: rgb(236, 78, 32); margin-top: 6px; margin-bottom: 36px; box-sizing: border-box; ;">Belangrijk!</h2>
+                <p class="noscript-msg" style="box-sizing: border-box; ;">
+                    Deze website vereist het gebruik van javascript.
+                    <br>
+                    <a href="https://www.enable-javascript.com/" target="_blank" class="text-primary" style="background-color: transparent; color: rgb(1, 111, 185); box-sizing: border-box; text-decoration: none; ;">
+                        Hier vind u instructies voor het aanzetten van javascript</a>.
+                </p>
+            </div>
+        </div>
+    </noscript>
+    
+
+    <!-- ******************************************************************************************************************************** -->
+
+    <!-- This may not be loaded when in webview and offline (sw will cache it offline in modern browsers). Lets hope android webviews dont need any polyfills -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+    <script src="cordova.js"></script>
+    <script src="lib/onsen/js/onsenui.min.js"></script>
+    <script src="lib/leaflet/leaflet.js"></script>
+    <script src="lib/proj4/proj4.js"></script>
+    <script src="lib/reproject.min.js"></script>
+    <script src="lib/geojson2svg/geojson2svg.js"></script>
+    <script src="js/core.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/kadaster-map.js"></script>
+    <script src="js/details.js"></script>
+</body>
+
+</html>

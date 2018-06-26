@@ -1,0 +1,20 @@
+<ons-page>
+    <ons-splitter>
+        <ons-splitter-side id="menu" side="left" width="220px" collapse>
+            <ons-page>
+                <ons-list>
+                    <ons-list-item onclick="fn.load('views/map.html')" tappable>
+                        Map
+                    </ons-list-item>
+                    <ons-list-item onclick="fn.load('settings.html')" tappable>
+                        Settings
+                    </ons-list-item>
+                    <ons-list-item onclick="fn.load('about.html')" tappable>
+                        About
+                    </ons-list-item>
+                </ons-list>
+            </ons-page>
+        </ons-splitter-side>
+        <ons-splitter-content id="content" page="views/map.html"></ons-splitter-content>
+    </ons-splitter>
+</ons-page>
