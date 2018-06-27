@@ -3,7 +3,7 @@
 
 <head>
 
-    <meta http-equiv="Content-Security-Policy" content="default-src ws: 'unsafe-inline' 'self' data: gap: https://ssl.gstatic.com http://*.tile.osm.org https://*.googleapis.com ws: 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://*.gstatic.com http://*.tile.osm.org https://*.googleapis.com; media-src *; font-src 'self' https://*.gstatic.com http://*.tile.osm.org https://*.googleapis.com; img-src 'self' https://*.nationaalgeoregister.nl https://*.gstatic.com http://*.tile.osm.org https://*.googleapis.com data: content:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.polyfill.io https://*.gstatic.com http://*.tile.osm.org https://maps.googleapis.com; connect-src 'self' https://epsg.io https://*.nationaalgeoregister.nl https://*.gstatic.com https://*.googleapis.com;">
+    <meta http-equiv="Content-Security-Policy" content="default-src ws: 'unsafe-inline' 'self' data: gap: https://ssl.gstatic.com http://*.tile.osm.org https://*.googleapis.com ws: 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://*.gstatic.com http://*.tile.osm.org https://*.googleapis.com; media-src *; font-src 'self' https://*.gstatic.com http://*.tile.osm.org https://*.googleapis.com; img-src 'self' http://*.google.com https://*.nationaalgeoregister.nl https://*.gstatic.com http://*.tile.osm.org https://*.googleapis.com data: content:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.polyfill.io https://*.gstatic.com http://*.tile.osm.org https://maps.googleapis.com; connect-src 'self' https://*.teleport.org https://epsg.io https://*.nationaalgeoregister.nl https://*.gstatic.com https://*.googleapis.com;">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
@@ -12,17 +12,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
-    <link rel="manifest" href="./manifest.json">
-    <link rel="mask-icon" href="./safari-pinned-tab.svg" color="#2b5797">
     
-    <meta name="apple-mobile-web-app-title" content="OV Fiets App">
-    <meta name="application-name" content="OV Fiets App">
-    <meta name="msapplication-TileColor" content="#2b5797">
-    <meta name="msapplication-navbutton-color" content="#f7c613">
-    <meta name="theme-color" content="#f7c613">
+
+    
     <meta name="description" content="Met de OV Fiets Website kunt u gemakkelijk informatie opzoeken over OV Fiets huurlocaties.">
     <meta name="author" content="Sem Postma, sem.postma@gmail.com">
     <meta name="keywords" content="Ov, Fiets, App, Website, Informatie, Vervoer, Verkeer, Openbaar, Huur, Locaties, Browser, Google, Play">
@@ -36,7 +28,7 @@
 
     
 
-    <title>OV Fiets App</title>
+    <title>Kadaster Kaart</title>
 </head>
 
 <body>
@@ -79,12 +71,12 @@
     <script src="lib/onsen/js/onsenui.min.js"></script>
     <script src="lib/leaflet/leaflet.js"></script>
     <script src="lib/proj4/proj4.js"></script>
-    <script src="lib/reproject.min.js"></script>
     <script src="lib/geojson2svg/geojson2svg.js"></script>
     <script src="js/core.js"></script>
     <script src="js/index.js"></script>
     <script src="js/kadaster-map.js"></script>
     <script src="js/details.js"></script>
+    <script src="js/search.js"></script>
 </body>
 
 </html>

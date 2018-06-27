@@ -10,8 +10,6 @@ function getJSON(url, cb) {
             if (this.status == 200) {
                 var myArr = JSON.parse(this.responseText);
                 cb(JSON.parse(this.responseText));
-            } else {
-                onError();
             }
         }
     };
@@ -36,3 +34,4 @@ function _promise() {
     }
     return d;
 }
+

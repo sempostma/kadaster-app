@@ -9,7 +9,11 @@
     </author>
     <content src="index.html" />
     <access origin="*" />
-    <allow-navigation href="*" />
+    <allow-navigation href="https://echosierrastudio.github.io/EchoSierraStudio/privacy-policy.html" />
+    <allow-navigation href="https://esstudio.site/*" />
+    <allow-navigation href="https://esstudio.site" />
+    <allow-navigation href="mailto:polyismstudio@gmail.com" />
+    <allow-navigation href="http://ec.europa.eu/ipg/basics/legal/cookies/index_en.htm" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />

@@ -1,9 +1,9 @@
-function initMap() {
+function initMap(page) {
 
     var interacted = false;
     var zoomedLowEnough = false;
 
-    var map = L.map('map', {
+    var map = window.fn.map = L.map('map', {
         zoomControl: false,
         maxZoom: 21,
         bounceAtZoomLimits: false,
@@ -11,16 +11,11 @@ function initMap() {
     L.control.zoom({
         position: 'topright',
     }).addTo(map);
+    
     map.setView([53.232, 6.569], 16);
 
-    // load OpenStreetMap basemap
-    var basemap = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-        format: 'image/png',
-        transparent: true,
-        maxZoom: 21,
-
-    });
-    basemap.addTo(map);
+    if (window.fn.layerType === 'sat') loadSat();
+    else loadKaart();
 
     L.tileLayer.wms('https://geodata.nationaalgeoregister.nl/kadastralekaartv3/wms?', {
         layers: 'kadastralekaartv3:kadastralegrens,annotatie,perceel',
@@ -32,14 +27,23 @@ function initMap() {
         minZoom: 10
     }).addTo(map);
 
-
     var geoJson = L.geoJson(undefined, { onEachFeature: onEachFeature });
     geoJson.addTo(map);
 
     var geoJson2 = L.geoJson(undefined, { onEachFeature: onEachFeature2 });
     geoJson2.addTo(map);
 
-    map.locate({ setView: true, maxZoom: 30 });
+    var city = window.fn.city;
+    if (city) {
+        window.fn.city = null;
+        getJSON(city._links['city:item'].href, function (cityInfo) {
+            var latLon = cityInfo.location.latlon;
+            map.setView(new L.LatLng(latLon.latitude, latLon.longitude), 13);
+        });
+    } else {
+        map.locate({ setView: true, maxZoom: 30 });
+    }
+
 
     map.on("moveend", function () {
         var zoom = map.getZoom();
@@ -78,9 +82,6 @@ function initMap() {
     });
 
 
-
-    map.locate({ setView: true, maxZoom: 30 });
-
     //---------------------------------------------------------------------------------------------------------------------------------//
 
     function onEachFeature(feature, layer) {
@@ -114,10 +115,10 @@ function initMap() {
                         data: {
                             feature: feature,
                         }
-                     });
+                    });
                 });
-            })
-     
+            });
+
             layer.bindPopup(properties.join('<br>'));
         }
 
@@ -181,10 +182,24 @@ function initMap() {
 
     info.addTo(map);
 
-    setTimeout(function () {
+    var timeout = setTimeout(function () {
         if (zoomedLowEnough) return;
         ons.notification.toast('Zoom in om kadaster informatie te bekijken.', { timeout: 4000, animation: 'fall' });
     }, 6000);
+
+    page.addEventListener('hide', function () {
+        console.log('map hide');
+        clearTimeout(timeout);
+    })
+
+    page.addEventListener('destroy', function () {
+        map.eachLayer(function (layer) {
+            layer.remove();
+        });
+        map.remove();
+        window.fn.map = null;
+        document.getElementById('map').parentElement.removeChild(document.getElementById('map'));
+    });
 
 
 
@@ -203,6 +218,30 @@ function initMap() {
         info.update();
         geoJson2.clearLayers();
     }
+}
+
+function loadKaart() {
+    // load OpenStreetMap basemap
+    var kaart = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        format: 'image/png',
+        transparent: true,
+        zIndex: 0,
+        maxZoom: 21,
+    });
+    window.fn.layerType = 'kaart';
+    window.fn.layer = kaart;
+    window.fn.map.addLayer(kaart);
+}
+
+function loadSat() {
+    var googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+        maxZoom: 20,
+        zIndex: 0,
+        subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+    });
+    window.fn.layerType = 'sat';
+    window.fn.layer = googleSat;
+    window.fn.map.addLayer(googleSat);
 }
 
 

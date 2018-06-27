@@ -1,6 +1,9 @@
 
 (function () {
 
+    var _proj4_proj_epsg4326 = new proj4.Proj('EPSG:4326');    //source coordinates will be in Longitude/Latitude, WGS84
+    var _proj4_proj_epsg3785 = new proj4.Proj('EPSG:3785');
+
     var pandenPromise;
     var verblijfPlaatsenPromise;
     var ligPlaatsenPromise;
@@ -21,6 +24,139 @@
     var woonpPlaatsen;
 
     window.initDetailsMisc = function (page) {
+        woonPlaatsenPromise.then(function () {
+            ligPlaatsenPromise.then(function () {
+                standPlaatsenPromise.then(function () {
+                    setupDetailMiscPage(page);
+                });
+            });
+        });
+    }
+
+    function setupDetailMiscPage(page) {
+        var woonplaatsenList = document.getElementById('woonplaats-misc-list-item-container');
+        var ligPlaatsenList = document.getElementById('ligplaatsen-misc-list-item-container');
+        var standPlaatsenList = document.getElementById('standplaatsen-misc-list-item-container');
+
+        woonpPlaatsen.features.forEach(function (feature) {
+            var props = feature.properties;
+            var listItem = document.createElement('div');
+            listItem.innerHTML =
+                '<ons-list-item><div class="left">' + props.woonplaats +
+                '</div><div class="center"><small>' + feature.id.replace('.', ' ') + ', ' + 'Identificatie: ' + 'props.identificatie' +
+                ', Status: ' + props.status + '</small></div></ons-list-item>';
+            woonplaatsenList.appendChild(listItem);
+        });
+
+        if (woonpPlaatsen.features.length === 0) {
+            woonplaatsenList.innerHTML =
+                '<ons-list-item>Geen woonplaatsen gevonden</ons-list-item>';
+        }
+
+        ligPlaatsen.features.forEach(function (feature) {
+            var props = feature.properties;
+            var html = '<ons-list-item expandable>';
+            html += feature.id.replace('.', ' ');
+            html += '<div class="expandable-content">';
+            html += '<div><b>Actualiteitsdatum:</b> ' + (props.actualiteitsdatum
+                ? new Date(props.actualiteitsdatum).toLocaleDateString()
+                : 'Niet beschikbaar') + '</div>';
+            html += '<div><b>Huisletter</b> ' + (props.huisletter || '') + '</div>';
+            html += '<div><b>Huisnummer:</b> ' + props.huisnummer + '</div>';
+            html += '<div><b>Identificatie:</b> ' + props.identificatie + '</div>';
+            html += '<div><b>Openbare ruimte:</b> ' + props.openbare_ruimte + '</div>';
+            html += '<div><b>Postcode:</b> ' + props.postcode + '</div>';
+            html += '<div><b>Status:</b> ' + props.status + '</div>';
+            html += '<div><b>Toevoeging:</b> ' + (props.toevoeging || '') + '</div>';
+            html += '<div><b>Woonplaats:</b> ' + props.woonplaats + '</div>';
+            html += '</div></ons-list-item>';
+            var div = document.createElement('div');
+            div.innerHTML = html;
+            ligPlaatsenList.appendChild(div);
+        });
+
+        if (ligPlaatsen.features.length === 0) {
+            ligPlaatsenList.innerHTML =
+                '<ons-list-item>Geen ligplaatsen gevonden</ons-list-item>';
+        }
+
+        standPlaatsen.features.forEach(function (feature) {
+            var props = feature.properties;
+            var html = '<ons-list-item expandable>';
+            html += feature.id.replace('.', ' ');
+            html += '<div class="expandable-content">';
+            html += '<div><b>Actualiteitsdatum:</b> ' + (props.actualiteitsdatum
+                ? new Date(props.actualiteitsdatum).toLocaleDateString()
+                : 'Niet beschikbaar') + '</div>';
+            html += '<div><b>Huisletter</b> ' + (props.huisletter || '') + '</div>';
+            html += '<div><b>Huisnummer:</b> ' + props.huisnummer + '</div>';
+            html += '<div><b>Identificatie:</b> ' + props.identificatie + '</div>';
+            html += '<div><b>Openbare ruimte:</b> ' + props.openbare_ruimte + '</div>';
+            html += '<div><b>Postcode:</b> ' + props.postcode + '</div>';
+            html += '<div><b>Status:</b> ' + props.status + '</div>';
+            html += '<div><b>Toevoeging:</b> ' + (props.toevoeging || '') + '</div>';
+            html += '<div><b>Woonplaats:</b> ' + props.woonplaats + '</div>';
+            html += '</div></ons-list-item>';
+            var div = document.createElement('div');
+            div.innerHTML = html;
+            standPlaatsenList.appendChild(div);
+        });
+
+        if (standPlaatsen.features.length === 0) {
+            standPlaatsenList.innerHTML =
+                '<ons-list-item>Geen standplaatsen gevonden</ons-list-item>';
+        }
+
+        console.log('misc', woonpPlaatsen, ligPlaatsen, standPlaatsen);
+    }
+
+    window.initDetailsVerblijfObjectDetail = function (page) {
+        var verblijfsobject = page.data.verblijfobject;
+        var props = verblijfsobject.properties;
+
+        document.getElementById('details-vo-actualiteitsdatum').innerText =
+            props.actualiteitsdatum
+                ? new Date(props.actualiteitsdatum).toLocaleDateString()
+                : 'Niet beschikbaar';
+
+        document.getElementById('details-vo-bouwjaar').innerText =
+            props.bouwjaar || 'Niet beschikbaar';
+
+        document.getElementById('details-vo-gebruiksdoel').innerText =
+            props.gebruiksdoel || 'Niet beschikbaar';
+
+        document.getElementById('details-vo-huisletter').innerText =
+            props.huisletter || 'Niet van toepassing';
+
+        document.getElementById('details-vo-huisnummer').innerText =
+            props.huisnummer || 'Niet beschikbaar';
+
+        document.getElementById('details-vo-identificatie').innerText =
+            props.identificatie || 'Niet beschikbaar';
+
+        document.getElementById('details-vo-openbare-ruimte').innerText =
+            props.openbare_ruimte || 'Niet beschikbaar';
+
+        document.getElementById('details-vo-oppervlakte').innerText =
+            props.oppervlakte || 'Niet beschikbaar';
+
+        document.getElementById('details-vo-pandidentificatie').innerText =
+            props.pandidentificatie || 'Niet beschikbaar';
+
+        document.getElementById('details-vo-pandstatus').innerText =
+            props.pandstatus || 'Niet beschikbaar';
+
+        document.getElementById('details-vo-postcode').innerText =
+            props.postcode;
+
+        document.getElementById('details-vo-status').innerText =
+            props.status || 'Niet beschikbaar';
+
+        document.getElementById('details-vo-toevoeging').innerText =
+            props.toevoeging || 'Niet van toepassing';
+
+        document.getElementById('details-vo-woonplaats').innerText =
+            props.woonplaats;
 
     }
 
@@ -31,18 +167,27 @@
             var html = '';
             for (var i = 0; i < panden.features.length; i++) {
                 var props = panden.features[i].properties;
-                html += '<ons-list-item><div class="left">';
-                html += panden.features[i].id.replace('.', ' ');
-                html += '</div><div class="right">';
+                html += '<ons-list-item expandable>';
                 var paths = toSVGPathsArr(panden.features[i], 250, 250, {
-                    'style': 'stroke:#00ff00; fill: #F0F8FF;stroke-width:0.5px;',
+                    'style': 'stroke:#660000; fill: #F0F8FF;stroke-width:0.5px;',
                     'vector-effect': 'non-scaling-stroke'
                 });
-                var svg = '<svg width="40" height="40" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">';
-                svg += paths.join('');
-                svg += '</svg>';
-                html += svg;
+                html += panden.features[i].id.replace('.', ' ');
+                html += '<div class="expandable-content">';
+                html += '<svg class="pand-svg" width="200" height="200" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">';
+                html += paths.join('');
+                html += '</svg>';
+                html += '<div><b>Oppervlakte (min):</b> ' + props.oppervlakte_min + 'm<sup>2</sub></div>';
+                html += '<div><b>Oppervlakte (max):</b> ' + props.oppervlakte_max + 'm<sup>2</sub></div>';
+                html += '<div><b>Actualiteitsdatum:</b> ' + (props.actualiteitsdatum || 'Niet beschikbaar') + '</div>';
+                html += '<div><b>Gebruiksdoel:</b> ' + (props.gebruiksdoel || 'Niet beschikbaar/van toepassing') + '</div>';
+                html += '<div><b>Bouwjaar:</b> ' + (props.bouwjaar || 'Niet beschikbaar') + '</div>';
+                html += '<div><b>Identificatie:</b> ' + (props.identificatie || 'Niet beschikbaar') + '</div>';
+                html += '<div><b>Status:</b> ' + (props.status || 'Niet beschikbaar') + '</div>';
                 html += '</div></ons-list-item>';
+            }
+            if (panden.features.length === 0) {
+                html += '<h3>Geen panden op dit perceel.</h3>'
             }
             var d = document.createElement('div');
             d.innerHTML = html;
@@ -51,7 +196,42 @@
     }
 
     window.initDetailsVerblijfsPlaatsen = function (page) {
+        verblijfPlaatsenPromise.then(function () {
+            var list = document.getElementById('details-verblijfplaatsen-list');
+            for (var i = 0; i < verblijfsObjecten.features.length; i++) {
+                (function () {
+                    var verblijfobject = verblijfsObjecten.features[i];
+                    var props = verblijfobject.properties;
+                    var paths = toSVGPathsArr({ type: verblijfobject.type, geometry: props.pandgeometrie }, 250, 250, {
+                        'style': 'stroke:#660000; fill: #F0F8FF;stroke-width:0.5px;',
+                        'vector-effect': 'non-scaling-stroke'
+                    });
+                    var html = '<ons-list-item tappable>';
+                    html += '<div class="left">'
+                    html += '<svg class="pand-svg" width="40" height="40" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">';
+                    html += paths.join('');
+                    html += '</svg></div>';
+                    html += '<div class="center">';
+                    html += [props.openbare_ruimte, props.huisnummer + props.huisletter + (props.toevoeging || '') + ',', props.postcode + ',', props.woonplaats].join(' ');
+                    html += '</div></ons-list-item>';
+                    var el = document.createElement('div');
+                    el.innerHTML = html;
+                    var featureClosure = verblijfsObjecten.features[i];
+                    el.firstChild.addEventListener('click', function (e) {
+                        document.getElementById('navigator').pushPage('views/details-verblijfobject-detail.html', {
+                            data: { verblijfobject: verblijfobject }
+                        });
+                    });
+                    list.appendChild(el.firstChild);
+                })();
 
+            }
+            if (verblijfsObjecten.features.length === 0) {
+                var el = document.createElement('h3');
+                el.innerText = 'Geen verblijfplaatsen op dit perceel.';
+                list.appendChild(el);
+            }
+        });
     }
 
     window.initDetailsGeneral = function initDetailsGeneral(page) {
@@ -113,8 +293,12 @@
         standPlaatsenPromise = _promise();
 
         feature = page.data.feature;
-        geojson3857 = reproject.reproject(
-            page.data.feature, 'EPSG:4326', 'EPSG:3857', proj4.defs);
+
+
+
+        console.log('transform', feature.geometry.coordinates[0][0]);
+        transformToEspg3857OnSpot(feature);
+        var geojson3857 = feature;
 
         console.log(geojson3857);
         xMin = Infinity;
@@ -135,7 +319,7 @@
         var geojson2svg_converter = geojson2svg({
             viewportSize: { width: 250, height: 250 },
             attributes: {
-                'style': 'stroke:#00ff00; fill: #F0F8FF;stroke-width:0.5px;',
+                'style': 'stroke:#006600; fill: #F0F8FF;stroke-width:0.5px;',
                 'vector-effect': 'non-scaling-stroke'
             },
             mapExtent: {
@@ -243,7 +427,6 @@
     }
 
     function toSVGPathsArr(geojson3857, vbwidth, vbheight, attributes) {
-        console.log(geojson3857);
         xMin = Infinity;
         xMax = -Infinity;
         yMin = Infinity;
@@ -279,5 +462,18 @@
         return geojson2svg_converter.convert(geojson3857);
     }
 
+    function transformToEspg3857OnSpot(feature) {
+        for (var h = 0; h < feature.geometry.coordinates.length; h++) {
+            var c2 = feature.geometry.coordinates[h];
+            for (var i = 0; i < c2.length; i++) {
+                var p = new proj4.Point(c2[i][0], c2[i][1]);   //any object will do as long as it has 'x' and 'y' properties
+                proj4.transform(_proj4_proj_epsg4326, _proj4_proj_epsg3785, p);
+                c2[i][0] = p.x;
+                c2[i][1] = p.y;
+            }
+        }
+    }
+
 })();
+
 

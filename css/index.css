@@ -85,7 +85,7 @@ a:active {
     z-index: 400;
     position: absolute;
     overflow: hidden;
-    background: #ddd;
+    background: #fff;
 }
 
 #zoomlevel-progress {
@@ -136,4 +136,32 @@ a:active {
     user-select: all;
     user-select: text;
 }
+
+.pand-svg {
+    float: left;
+    display: block;
+    margin-right: 8px;
+}
+
+.vert-middle > * {
+    vertical-align: middle;
+}
+
+#details-verblijfobject-detail ons-list-item .right {
+    text-transform: capitalize;
+}
+
+ons-toast {
+    max-width: 400px!important;
+    margin: auto;
+}
+
+.hidden {
+    display: none;
+}
+
+.vert-middle > * {
+    vertical-align: middle;
+}
+
 

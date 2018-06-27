@@ -1,16 +1,19 @@
-<ons-page>
+<ons-page id="splitter">
     <ons-splitter>
         <ons-splitter-side id="menu" side="left" width="220px" collapse>
             <ons-page>
                 <ons-list>
-                    <ons-list-item onclick="fn.load('views/map.html')" tappable>
-                        Map
+                    <ons-list-item onclick="fn.loadkaart()" tappable>
+                        Kaart
                     </ons-list-item>
-                    <ons-list-item onclick="fn.load('settings.html')" tappable>
-                        Settings
+                    <ons-list-item onclick="fn.loadluchtfoto()" tappable>
+                        Luchtfoto
                     </ons-list-item>
-                    <ons-list-item onclick="fn.load('about.html')" tappable>
-                        About
+                    <ons-list-item onclick="fn.load('views/search.html')" tappable>
+                        Zoeken
+                    </ons-list-item>
+                    <ons-list-item onclick="fn.load('views/about.html')" tappable>
+                        Over Deze App
                     </ons-list-item>
                 </ons-list>
             </ons-page>

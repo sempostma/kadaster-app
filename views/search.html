@@ -1,0 +1,22 @@
+<ons-page id="search-page">
+    <ons-toolbar>
+        <div class="left">
+            <ons-toolbar-button onclick="fn.open()">
+                <ons-icon icon="md-menu"></ons-icon>
+            </ons-toolbar-button>
+        </div>
+        <div class="center">
+            Kaart
+        </div>
+    </ons-toolbar>
+    <p class="vert-middle" style="text-align: center;  padding-top: 20px;">
+        <ons-search-input input-id="location-search-input" placeholder="Naam van de locatie"></ons-search-input>
+        <ons-button id="location-search" ripple>Zoeken</ons-button>
+
+    </p>
+    <ons-card id="location-search-card" class="hidden" style="max-width: 600px; margin: 40px auto">
+        <ons-list-title>Resultaten</ons-list-title>
+        <ons-list id="location-search-results">
+        </ons-list>
+    </ons-card>
+</ons-page>

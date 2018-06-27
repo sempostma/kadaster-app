@@ -41,6 +41,10 @@ document.addEventListener('init', function (event) {
 	var page = event.target;
 	//console.log("button pressed");
 
+	if (page.id === 'splitter') {
+
+	}
+
 	if (page.id === 'map-page') {
 		initMap(page);
 	}
@@ -55,7 +59,7 @@ document.addEventListener('init', function (event) {
 
 	else if (page.id === 'details-panden') {
 		initDetailsPanden(page);
-	} 
+	}
 
 	else if (page.id === 'details-verblijfplaatsen') {
 		initDetailsVerblijfsPlaatsen(page);
@@ -63,6 +67,14 @@ document.addEventListener('init', function (event) {
 
 	else if (page.id === 'details-misc') {
 		initDetailsMisc(page);
+	}
+
+	else if (page.id === 'details-verblijfobject-detail') {
+		initDetailsVerblijfObjectDetail(page);
+	}
+
+	else if (page.id === 'search-page') {
+		initSearchPage(page);
 	}
 });
 
@@ -94,6 +106,32 @@ window.fn.load = function (page) {
 		.then(menu.close.bind(menu));
 };
 
+window.fn.loadkaart = function() {
+	if (window.fn.map && window.fn.layer) {
+		if (window.fn.layerType === 'sat') {
+			window.fn.layer.remove();
+			loadKaart();
+			menu.close();
+		}
+	} else {
+		window.fn.layerType = 'kaart';
+		window.fn.load('views/map.html');
+	}
+}
+
+window.fn.loadluchtfoto = function () {
+	if (window.fn.map && window.fn.layer) {
+		if (window.fn.layerType === 'kaart') {
+			window.fn.layer.remove();
+			loadSat();
+			menu.close();
+		}
+	} else {
+		window.fn.layerType = 'sat';
+		window.fn.load('views/map.html');
+	}
+};
+
 (function () {
 	var gemeenteCodes;
 	var cbs = [];
@@ -109,6 +147,8 @@ window.fn.load = function (page) {
 		else cbs.push(cb);
 	}
 })();
+
+
 
 
 
