@@ -1,4 +1,4 @@
-var STATIC_CACHE = 'static-cache-v1'
+var STATIC_CACHE = 'static-cache-v2'
 
 // listen for outgoing network request
 self.addEventListener('fetch', function(event) {
@@ -19,6 +19,17 @@ self.addEventListener('fetch', function(event) {
 
 self.addEventListener('activate', function (event) {
     console.log('service worker activate');
+    var cacheWhitelist = [STATIC_CACHE];
+
+    event.waitUntil(
+        caches.keys().then(function (keyList) {
+            return Promise.all(keyList.map(function (key) {
+                if (cacheWhitelist.indexOf(key) === -1) {
+                    return caches.delete(key);
+                }
+            }));
+        })
+    );
 });
 
 self.addEventListener('install', function (event) {
