@@ -4,13 +4,13 @@
 <head>
 
     <meta http-equiv="Content-Security-Policy" content="
-        default-src ws: 'unsafe-inline' 'self' data: gap: https://ssl.gstatic.com http://*.tile.osm.org https://*.googleapis.com; 
-        style-src 'self' 'unsafe-inline' https://*.gstatic.com http://*.tile.osm.org https://*.googleapis.com;
+        default-src ws: 'unsafe-inline' 'self' data: gap: https://* http://*.tile.osm.org; 
+        style-src 'self' 'unsafe-inline' https://* http://*.tile.osm.org;
         media-src *; 
-        font-src 'self' https://*.gstatic.com http://*.tile.osm.org https://*.googleapis.com;
-        img-src 'self' https://*.openstreetmap.org https://*.google.com https://*.nationaalgeoregister.nl https://*.gstatic.com https://*.googleapis.com data: content:;
-        script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.polyfill.io https://*.gstatic.com http://*.tile.osm.org https://maps.googleapis.com;
-        connect-src 'self' https://*.teleport.org https://epsg.io https://*.nationaalgeoregister.nl https://*.gstatic.com https://*.googleapis.com; ">
+        font-src data: 'self' https://* http://*.tile.osm.org;
+        img-src 'self' https://* data: content:;
+        script-src 'self' 'unsafe-inline' 'unsafe-eval' https://* http://*.tile.osm.org;
+        connect-src 'self' https://*;">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">

@@ -1,10 +1,10 @@
 if (navigator['serviceWorker']) {
-    navigator.serviceWorker.register('./sw.js', { scope: './' }).then(function (registration) {
-        console.log('Service worker successfully registered on scope', registration.scope);
+	navigator.serviceWorker.register('./sw.js', { scope: './' }).then(function (registration) {
+		console.log('Service worker successfully registered on scope', registration.scope);
 
-    }).catch(function (error) {
-        console.log('Service worker failed to register');
-    });
+	}).catch(function (error) {
+		console.log('Service worker failed to register');
+	});
 }
 
 if (navigator.userAgent.indexOf('MSIE') !== -1
@@ -23,4 +23,38 @@ if (navigator.userAgent.indexOf('MSIE') !== -1
 	</div>\
 </div>'.split('\n').join('');
 }
+
+var timeout = setTimeout(showFullVersionNotification, 1000 * 60 * 2);
+
+function showFullVersionNotification() {
+	clearTimeout(timeout);
+	ons.notification.confirm({
+		title: 'Toegang to meer functies',
+		id: 'get-the-full-version',
+		messageHTML: "<ul><li>Geen reclames</li><li>Toegang tot alle functies</li><li>Satelliet kaart</li><li>Zoekfunctie</li><li>Geolocatie</li><li>Eerder toegang tot nieuwe functies</li><li>Technische support</li></ul>\
+		<a target='_blank' href='https://play.google.com/store/apps/details?id=com.EchoSierraStudio.Kadaster_Kaart&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Ontdek het op Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/nl_badge_web_generic.png'/></a>",
+		buttonLabels: ['Volledige Versie', 'Annuleer'],
+		primaryButtonIndex: 0,
+		callback: function () {
+			timeout = setTimeout(showFullVersionNotification, 1000 * 60 * 2);
+		}
+	});
+
+	document.querySelector('#get-the-full-version .alert-dialog-button--primal').addEventListener('click', function () {
+		window.open('https://play.google.com/store/apps/details?id=com.EchoSierraStudio.Kadaster_Kaart', '_blank');
+	});
+}
+
+window.fn.trail = true;
+
+var ads = document.createElement("script");
+ads.async = true;
+ads.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
+ads.onload = function () {
+	(adsbygoogle = window.adsbygoogle || []).push({
+		google_ad_client: "ca-pub-9732535637352249",
+		enable_page_level_ads: true
+	});
+};
+document.head.appendChild(ads);
 
