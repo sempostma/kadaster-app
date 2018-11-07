@@ -31,7 +31,7 @@ function showFullVersionNotification() {
 	ons.notification.confirm({
 		title: 'Toegang to meer functies',
 		id: 'get-the-full-version',
-		messageHTML: "<ul><li>Geen reclames</li><li>Toegang tot alle functies</li><li>Satelliet kaart</li><li>Zoekfunctie</li><li>Geolocatie</li><li>Eerder toegang tot nieuwe functies</li><li>Technische support</li></ul>\
+		messageHTML: "<ul><li>Geen reclames</li><li>Informatie over panden, verblijfplaatsen, ligplaatsen, standplaatsen en woonplaatsen</li><li>Satelliet kaart (luchtfoto)</li><li>Zoekfunctie</li><li>Geolocatie</li><li>Eerder toegang tot nieuwe functies</li><li>Technische ondersteuning</li></ul>\
 		<a target='_blank' href='https://play.google.com/store/apps/details?id=com.EchoSierraStudio.Kadaster_Kaart&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Ontdek het op Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/nl_badge_web_generic.png'/></a>",
 		buttonLabels: ['Volledige Versie', 'Annuleer'],
 		primaryButtonIndex: 0,
