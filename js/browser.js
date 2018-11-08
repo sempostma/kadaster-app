@@ -47,6 +47,18 @@ function showFullVersionNotification() {
 
 window.fn.trail = true;
 
+// google analytics
+if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-90014538-4', 'auto');
+	ga('send', 'pageview');
+}
+
+// google ads
 var ads = document.createElement("script");
 ads.async = true;
 ads.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
