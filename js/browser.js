@@ -45,7 +45,7 @@ function showFullVersionNotification() {
 	});
 }
 
-window.fn.trail = true;
+window.fn.trail = false;
 
 // google analytics
 if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {

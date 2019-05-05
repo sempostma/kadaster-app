@@ -10,7 +10,8 @@
             Kadastrale Kaart App
         </div>
         <div class="right">
-            <ons-toolbar-button onclick="window.open('https://esstudio.site/kadaster-kaart', '_system')" title="Volledige versie" aria-label="Koop de volledige versie">
+            <ons-toolbar-button onclick="window.open('https://esstudio.site/kadaster-kaart', '_system')"
+                title="Volledige versie" aria-label="Koop de volledige versie">
                 <a>
                     <ons-icon icon="md-store"></ons-icon>
                 </a>
@@ -20,6 +21,9 @@
             </ons-toolbar-button>
         </div>
     </ons-toolbar>
+    <div id="map-click-loader" class="loader hide">
+        <ons-progress-bar indeterminate></ons-progress-bar>
+    </div>
     <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
         <div id="map"></div>
         <!-- <div id="zoomlevel">
@@ -33,7 +37,8 @@
             <ons-icon icon="md-more-vert"></ons-icon>
         </ons-fab>
         <!-- Sharingbutton Facebook -->
-        <a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3A%2F%2Fesstudio.site%2Fkadaster-kaart"
+        <a class="resp-sharing-button__link"
+            href="https://facebook.com/sharer/sharer.php?u=https%3A%2F%2Fesstudio.site%2Fkadaster-kaart"
             target="_system" rel="noopener" aria-label="">
             <ons-speed-dial-item>
                 <ons-icon icon="md-facebook"></ons-icon>
@@ -41,7 +46,8 @@
         </a>
 
         <!-- Sharingbutton Twitter -->
-        <a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?text=Met%20de%20Kadaster%20kaart%20app%2Fwebsite%20kun%20he%20gemakkelijk%20informatie%20opzoeken%20over%20percelen%20die%20geregistreerd%20staan%20bij%20het%20Kadaster.&amp;url=https%3A%2F%2Fesstudio.site%2Fkadaster-kaart"
+        <a class="resp-sharing-button__link"
+            href="https://twitter.com/intent/tweet/?text=Met%20de%20Kadaster%20kaart%20app%2Fwebsite%20kun%20he%20gemakkelijk%20informatie%20opzoeken%20over%20percelen%20die%20geregistreerd%20staan%20bij%20het%20Kadaster.&amp;url=https%3A%2F%2Fesstudio.site%2Fkadaster-kaart"
             target="_system" rel="noopener" aria-label="">
             <ons-speed-dial-item>
                 <ons-icon icon="md-twitter"></ons-icon>
@@ -49,7 +55,8 @@
         </a>
 
         <!-- Sharingbutton E-Mail -->
-        <a class="resp-sharing-button__link" href="mailto:?subject=Met%20de%20Kadaster%20kaart%20app%2Fwebsite%20kun%20he%20gemakkelijk%20informatie%20opzoeken%20over%20percelen%20die%20geregistreerd%20staan%20bij%20het%20Kadaster.&amp;body=https%3A%2F%2Fesstudio.site%2Fkadaster-kaart"
+        <a class="resp-sharing-button__link"
+            href="mailto:?subject=Met%20de%20Kadaster%20kaart%20app%2Fwebsite%20kun%20he%20gemakkelijk%20informatie%20opzoeken%20over%20percelen%20die%20geregistreerd%20staan%20bij%20het%20Kadaster.&amp;body=https%3A%2F%2Fesstudio.site%2Fkadaster-kaart"
             target="_system" rel="noopener" aria-label="">
             <ons-speed-dial-item>
                 <ons-icon icon="md-email"></ons-icon>
@@ -64,4 +71,7 @@
             <ons-icon icon="md-info"></ons-icon>
         </ons-speed-dial-item>
     </ons-speed-dial>
+    <ons-toast id="map-click-toast">
+        Loading location...
+    </ons-toast>
 </ons-page>
